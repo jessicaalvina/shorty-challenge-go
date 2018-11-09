@@ -66,7 +66,6 @@ Storage bertugas untuk menyimpan file-file seperti log error atau temporary file
 
 
 ## TODO
-- Database migration
 - Endpoint documentation
 - Authorization middleware
 - Ralali Old OAuth middleware
