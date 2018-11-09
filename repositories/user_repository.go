@@ -4,12 +4,12 @@ import (
 	"github.com/jinzhu/copier"
 	"github.com/jinzhu/gorm"
 	"ralali.com/models"
-	"ralali.com/requests"
+	"ralali.com/objects"
 )
 
 type UserRepository struct {
 	DB      gorm.DB
-	request requests.UserRequest
+	request objects.UserObject
 }
 
 func (repository *UserRepository) GetById(id int) (models.User, error) {

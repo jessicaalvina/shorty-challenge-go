@@ -3,12 +3,12 @@ package repositories
 import (
 	"github.com/jinzhu/gorm"
 	"ralali.com/models"
-	"ralali.com/requests"
+	"ralali.com/objects"
 )
 
 type OrderRepository struct {
 	DB      gorm.DB
-	request requests.UserRequest
+	request objects.UserObject
 }
 
 func (repository *OrderRepository) GetListByUserId(userId int, page int, perPage int) ([]models.Order, error) {

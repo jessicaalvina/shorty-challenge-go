@@ -7,14 +7,14 @@ import (
 	"os"
 	"ralali.com/constants"
 	"ralali.com/helpers"
-	"ralali.com/requests"
+	"ralali.com/objects"
 	"ralali.com/services"
 )
 
 type FileController struct {
 	errorHandling helpers.ErrorHandling
 	awsService    services.AWSS3Service
-	request       requests.FileRequest
+	request       objects.FileObject
 }
 
 func FileControllerHandler(router *gin.Engine, db *gorm.DB) {
@@ -22,7 +22,7 @@ func FileControllerHandler(router *gin.Engine, db *gorm.DB) {
 	handler := &FileController{
 		errorHandling: helpers.ErrorHandling{},
 		awsService:    services.AWSS3Service{},
-		request:       requests.FileRequest{},
+		request:       objects.FileObject{},
 	}
 
 	group := router.Group("files")

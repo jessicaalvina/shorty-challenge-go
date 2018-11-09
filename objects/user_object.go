@@ -1,6 +1,6 @@
-package requests
+package objects
 
-type UserRequest struct {
+type UserObject struct {
 	GetList struct {
 		Page    int `json:"page" form:"page"`
 		PerPage int `json:"per_page" form:"per_page"`

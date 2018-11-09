@@ -1,8 +1,8 @@
-package requests
+package objects
 
 import "mime/multipart"
 
-type FileRequest struct {
+type FileObject struct {
 	UploadFile struct {
 		File     *multipart.FileHeader `form_file:"file"`
 		FileName string                `form:"file_name"`

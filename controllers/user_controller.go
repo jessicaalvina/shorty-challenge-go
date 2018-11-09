@@ -7,14 +7,14 @@ import (
 	"ralali.com/constants"
 	"ralali.com/helpers"
 	"ralali.com/repositories"
-	"ralali.com/requests"
+	"ralali.com/objects"
 	"strconv"
 )
 
 type UserController struct {
 	repository    repositories.UserRepository
 	errorHandling helpers.ErrorHandling
-	request       requests.UserRequest
+	request       objects.UserObject
 
 	orderRepository repositories.OrderRepository
 }
@@ -24,7 +24,7 @@ func UserControllerHandler(router *gin.Engine, db *gorm.DB) {
 	handler := &UserController{
 		repository:      repositories.UserRepository{DB: *db},
 		errorHandling:   helpers.ErrorHandling{},
-		request:         requests.UserRequest{},
+		request:         objects.UserObject{},
 		orderRepository: repositories.OrderRepository{DB: *db},
 	}
 
