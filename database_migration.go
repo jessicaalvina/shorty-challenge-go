@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	"github.com/joho/godotenv"
 	"log"
@@ -52,6 +53,6 @@ func main() {
 
 	// migrate order
 	db.AutoMigrate(&models.Order{})
-	db.Model(&models.Order{}).AddForeignKey("user_id", "users(id)", "RESTRICT", "RESTRICT")
+	db.Model(&models.Order{}).AddForeignKey("user_id", "rl_users(id)", "RESTRICT", "RESTRICT")
 
 }
