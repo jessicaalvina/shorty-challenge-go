@@ -1,1 +1,0 @@
-# rl-ms-boilerplate-go
