@@ -53,7 +53,7 @@ func main() {
 	defaultMiddleware := middleware.DefaultMiddleware{}
 
 	router := gin.Default()
-	router.Use(defaultMiddleware.EnableCORS())
+	router.Use(defaultMiddleware.CORSMiddleware())
 
 	controllers.UserControllerHandler(router, db)
 	controllers.FileControllerHandler(router, db)
