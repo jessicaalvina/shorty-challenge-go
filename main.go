@@ -50,10 +50,13 @@ func main() {
 
 	defer db.Close()
 
-	defaultMiddleware := middleware.DefaultMiddleware{}
+	defaultMiddleware := middleware.DefaultMiddleware{
+		DB: db,
+	}
 
 	router := gin.Default()
 	router.Use(defaultMiddleware.CORSMiddleware())
+	router.Use(defaultMiddleware.RalaliOAuthMiddleware())
 
 	controllers.UserControllerHandler(router, db)
 	controllers.FileControllerHandler(router, db)

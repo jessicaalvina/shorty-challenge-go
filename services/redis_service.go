@@ -8,7 +8,7 @@ import (
 )
 
 type RedisService struct {
-	client *redis.Client
+	Client *redis.Client
 }
 
 func (service *RedisService) Initialize() (RedisService, error) {
@@ -21,7 +21,7 @@ func (service *RedisService) Initialize() (RedisService, error) {
 		return RedisService{}, err
 	}
 
-	service.client = redis.NewClient(&redis.Options{
+	service.Client = redis.NewClient(&redis.Options{
 		Addr:     connectionString,
 		Password: os.Getenv("REDIS_PASS"),
 		DB:       databaseNumber,
