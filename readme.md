@@ -26,7 +26,7 @@ Dengan adanya kebutuhan untuk memecah Arsitektur Ralali yang Monolitik menjadi m
  |- requests
  |- services
  |- storage
-   |- logs
+    |- logs
 ```
 #### constants
 
