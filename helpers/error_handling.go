@@ -1,11 +1,11 @@
 package helpers
 
 import (
-	"../constants"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
 	"os"
+	"ralali.com/constants"
 	"syscall"
 	"time"
 )

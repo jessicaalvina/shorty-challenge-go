@@ -1,8 +1,8 @@
 package main
 
 import (
-	"./controllers"
-	"./middleware"
+	"ralali.com/controllers"
+	"ralali.com/middleware"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
