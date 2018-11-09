@@ -1,6 +1,7 @@
 package repositories
 
 import (
+	"github.com/jinzhu/copier"
 	"github.com/jinzhu/gorm"
 	"ralali.com/models"
 	"ralali.com/requests"
@@ -23,7 +24,9 @@ func (repository *UserRepository) GetList(page int, perPage int) ([]models.User,
 	return userResponse, query.Error
 }
 
-func (repository *UserRepository) UpdateUser(userId int, user models.User) (models.User, error) {
+func (repository *UserRepository) UpdateUser(userId int, userRequest interface{}) (models.User, error) {
+	user := models.User{}
+	copier.Copy(&user, &userRequest)
 	query := repository.DB.Table("rl_users").Where("id=?", userId).Omit("created_at", "deleted_at", "id").Updates(user).Scan(&user)
 	return user, query.Error
 }

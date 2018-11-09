@@ -14,7 +14,8 @@ Dengan adanya kebutuhan untuk memecah Arsitektur Ralali yang Monolitik menjadi m
 - https://github.com/jinzhu/gorm -> (https://github.com/go-sql-driver/mysql)
 - https://github.com/joho/godotenv
 
-### Directory Structure
+### Architecture Structure
+![architecture diagram](storage/golang%20architecture%20diagram.png)
 ```
 - rl-ms-boilerplate-go
  |- constants

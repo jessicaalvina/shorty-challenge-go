@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"ralali.com/constants"
 	"ralali.com/helpers"
-	"ralali.com/models"
 	"ralali.com/repositories"
 	"ralali.com/requests"
 	"strconv"
@@ -87,14 +86,14 @@ func (handler *UserController) UpdateUser(context *gin.Context) {
 		handler.errorHandling.HTTPResponseError(context, err, constants.RequestParameterInvalid)
 	}
 
-	user := models.User{}
+	userRequest := handler.request.UpdateUser
 
-	err = context.ShouldBindJSON(&user)
+	err = context.ShouldBindJSON(&userRequest)
 	if nil != err {
 		handler.errorHandling.HTTPResponseError(context, err, constants.RequestParameterInvalid)
 	}
 
-	result, err := handler.repository.UpdateUser(id, user)
+	result, err := handler.repository.UpdateUser(id, userRequest)
 	if nil != err {
 		handler.errorHandling.HTTPResponseError(context, err, constants.InternalServerError)
 	}
