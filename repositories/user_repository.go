@@ -1,9 +1,9 @@
 package repositories
 
 import (
+	"../models"
+	"../requests"
 	"github.com/jinzhu/gorm"
-	"ralali.com/models"
-	"ralali.com/requests"
 )
 
 type UserRepository struct {

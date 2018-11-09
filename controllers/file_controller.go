@@ -1,14 +1,14 @@
 package controllers
 
 import (
+	"../constants"
+	"../helpers"
+	"../requests"
+	"../services"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"net/http"
 	"os"
-	"ralali.com/constants"
-	"ralali.com/helpers"
-	"ralali.com/requests"
-	"ralali.com/services"
 )
 
 type FileController struct {

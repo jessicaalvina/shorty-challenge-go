@@ -1,6 +1,8 @@
 package services
 
 import (
+	"../constants"
+	"../helpers"
 	"bytes"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
@@ -9,8 +11,6 @@ import (
 	"io"
 	"net/http"
 	"os"
-	"ralali.com/constants"
-	"ralali.com/helpers"
 )
 
 type AWSS3Service struct {
