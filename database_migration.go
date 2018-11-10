@@ -51,8 +51,4 @@ func main() {
 	// migrate user
 	db.AutoMigrate(&models.User{})
 
-	// migrate order
-	db.AutoMigrate(&models.Order{})
-	db.Model(&models.Order{}).AddForeignKey("user_id", "rl_users(id)", "RESTRICT", "RESTRICT")
-
 }
