@@ -56,10 +56,8 @@ func main() {
 
 	router := gin.Default()
 	router.Use(defaultMiddleware.CORSMiddleware())
-	router.Use(defaultMiddleware.RalaliOAuthMiddleware())
 
 	controllers.UserControllerHandler(router, db)
-	controllers.FileControllerHandler(router, db)
 
 	serverHost := os.Getenv("SERVER_ADDRESS")
 	serverPort := os.Getenv("SERVER_PORT")

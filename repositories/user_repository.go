@@ -1,6 +1,7 @@
 package repositories
 
 import (
+	"fmt"
 	"github.com/jinzhu/copier"
 	"github.com/jinzhu/gorm"
 	"ralali.com/models"
@@ -8,25 +9,39 @@ import (
 )
 
 type UserRepository struct {
-	DB      gorm.DB
-	request objects.UserObject
+	DB gorm.DB
+}
+
+func UserRepositoryHandler(db *gorm.DB) (UserRepository) {
+	repository := UserRepository{DB: *db}
+	return repository
 }
 
 func (repository *UserRepository) GetById(id int) (models.User, error) {
+
 	userResponse := models.User{}
-	query := repository.DB.Table("rl_users").Where("id=?", id).First(&userResponse)
+
+	query := repository.DB.Table("rl_users")
+	query = query.Where("id=?", id)
+	query = query.First(&userResponse)
+
 	return userResponse, query.Error
+
 }
 
-func (repository *UserRepository) GetList(page int, perPage int) ([]models.User, error) {
-	var userResponse []models.User
-	query := repository.DB.Table("rl_users").Offset((page - 1) * perPage).Limit(perPage).Scan(&userResponse)
-	return userResponse, query.Error
-}
+func (repository *UserRepository) UpdateById(id int, userData objects.UserObject) (models.User, error) {
 
-func (repository *UserRepository) UpdateUser(userId int, userRequest interface{}) (models.User, error) {
-	user := models.User{}
-	copier.Copy(&user, &userRequest)
-	query := repository.DB.Table("rl_users").Where("id=?", userId).Omit("created_at", "deleted_at", "id").Updates(user).Scan(&user)
-	return user, query.Error
+	userModel := models.User{}
+	copier.Copy(&userModel, &userData)
+
+	fmt.Println(userModel)
+	fmt.Println(userData)
+
+	query := repository.DB.Table("rl_users")
+	query = query.Where("id=?", id)
+	query = query.Updates(userModel)
+	query = query.Scan(&userModel)
+
+	return userModel, query.Error
+
 }

@@ -23,43 +23,43 @@ Dengan adanya kebutuhan untuk memecah Arsitektur Ralali yang Monolitik menjadi m
  |- helpers
  |- middlerware
  |- models
+ |- objects
  |- repositories
- |- requests
  |- services
  |- storage
     |- logs
 ```
-#### constants
-
-Digunakan untuk menyimpan constant-constant seperti `error_constants` atau `configuration_constants`.
-
-#### controllers
-
-Controller bertugas untuk menghandle HTTP Request, routing dimasukkan per-controller dan digroup berdasarkan controller, controller terhubung dengan repository dan service.
-
-#### helpers
-
-Helper bertugas untuk menampung fungsi-fungsi yang sering digunakan, contohnya `error_handling`, `http_response_handling`, atau `language_handling`.
-
 #### middleware
 
 Digunakan untuk menyimpan middleware-middleware yang akan digunakan, contoh `cors_middleware` atau `oauth_middleware`.
+
+#### controllers
+
+Controller bertugas untuk menghandle HTTP Request, routing dimasukkan per-controller dan digroup berdasarkan controller, controller terhubung dengan service.
+
+#### service
+
+Service bertugas untuk menghandle business logic, service memungkinkan untuk memanggil banyak repository dan atau service lain.
+
+#### repositories
+
+Repository bertugas untuk menghandle query-query ke database atau storage lainnya, jangan menambahkan logic-logic programming berat pada layer ini.
 
 #### models
 
 Models bertugas untuk menampung model-model representasi database schema yang dapat digunakan untuk kepentingan migration atau enkapsulasi data.
 
-#### repositories
+#### objects
 
-Repository bertugas untuk menghandle use-case use-case dari proses bisnis, misalnya untuk mendapatkan order detail, payment detail, atau menjalankan proses-proses logic kebutuhan bisnis.
+Objects bertugas sebagai transporter data antar layer, objects juga bertugas untuk melakukan enkapsulasi data dari HTTP request ataupun sebagai response dari sebuah request.
 
-#### request
+#### helpers
 
-Requests bertugas menampung struct-struct untuk mengenkapsulasi request dari client kepada HTTP handler (controller).
+Bertugas untuk menyimpan helpers atau libraries yang sering digunakan contohnya `error_helper` atau `redis_helper`.
 
-#### service
+#### constants
 
-Service digunakan untuk menghandle service-service seperti 3rd party service atau contohnya cache service.
+Digunakan untuk menyimpan constant-constant seperti `error_constants` atau `configuration_constants`.
 
 #### storage
 
@@ -69,8 +69,6 @@ Storage bertugas untuk menyimpan file-file seperti log error atau temporary file
 ## TODO
 - Endpoint documentation
 - Authorization middleware
-- Ralali Old OAuth middleware
-- Ralali New OAuth middleware
 
 ## How to Setup
 

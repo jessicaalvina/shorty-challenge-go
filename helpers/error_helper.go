@@ -10,18 +10,14 @@ import (
 	"time"
 )
 
-type CustomError struct {
-	E string
+type ErrorHelper struct {
 }
 
-func (service *CustomError) Error() string {
-	return service.E
+func ErrorHelperHandler() (ErrorHelper) {
+	return ErrorHelper{}
 }
 
-type ErrorHandling struct {
-}
-
-func (handler *ErrorHandling) HTTPResponseError(context *gin.Context, e error, errorCode int) {
+func (handler *ErrorHelper) HTTPResponseError(context *gin.Context, e error, errorCode int) {
 	errorConstant := constants.GetErrorConstant(errorCode)
 	context.JSON(errorConstant.HttpCode, gin.H{
 		"code":    errorConstant.HttpCode,
@@ -30,7 +26,7 @@ func (handler *ErrorHandling) HTTPResponseError(context *gin.Context, e error, e
 	handler.LogError(e, true)
 }
 
-func (handler *ErrorHandling) LogError(e error, isPanic bool) {
+func (handler *ErrorHelper) LogError(e error, isPanic bool) {
 
 	currentTime := time.Now()
 
@@ -50,7 +46,7 @@ func (handler *ErrorHandling) LogError(e error, isPanic bool) {
 	log.Print("\n\n\n\n\n---> Error start here\n")
 
 	if nil == e {
-		log.Println(CustomError{E: "There's no error but calling logError!"})
+		log.Println("There's no error but calling logError!")
 	} else {
 		log.Println(e)
 	}

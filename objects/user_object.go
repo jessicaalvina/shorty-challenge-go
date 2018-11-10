@@ -1,12 +1,8 @@
 package objects
 
 type UserObject struct {
-	GetList struct {
-		Page    int `json:"page" form:"page"`
-		PerPage int `json:"per_page" form:"per_page"`
-	}
-	UpdateUser struct {
-		Name  int `json:"name" form:"name"`
-		Email int `json:"email" form:"email"`
-	}
+	ID           uint   `json:"id"`
+	Name         string `json:"name"`
+	Email        string `json:"email"`
+	ImageProfile string `json:"image_profile"`
 }
