@@ -14,13 +14,11 @@ import (
 type UserController struct {
 	userService services.UserService
 	errorHelper helpers.ErrorHelper
-	request     objects.UserObject
 }
 
 func UserControllerHandler(router *gin.Engine, db *gorm.DB) {
 
 	handler := &UserController{
-		request:     objects.UserObject{},
 		userService: services.UserServiceHandler(db),
 		errorHelper: helpers.ErrorHelperHandler(),
 	}
