@@ -45,6 +45,7 @@ func (handler *ErrorHelper) LogError(e error, isPanic bool) {
 	logFullPath := fmt.Sprintf("%s/error-%s.log", filePath, fileName)
 
 	file, err := os.OpenFile(logFullPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0600)
+
 	if nil != err {
 		fmt.Println(err)
 	}
@@ -59,7 +60,7 @@ func (handler *ErrorHelper) LogError(e error, isPanic bool) {
 	}
 
 	if isPanic {
-		log.Panic(e.Error() + "\n\n--end-of-error--\n\n")
+		log.Panic(e)
 	}
 
 }
