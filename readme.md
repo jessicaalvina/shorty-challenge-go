@@ -169,7 +169,14 @@ go test services -v -cover
 go test controllers -v -cover
 ``` 
 
-unit testing dijalankan pada masing-masing layer yang ada.
+### Code Versioning
+versioning level dilakukan pada layer 
+- `controllers` 
+- `objects` 
+- `repositories` 
+- `services`
+
+setiap file pada layer-layer tersebut diberi prefix version dengan format snake case, seperti pada contoh yang ada `v1_user_controller.go` yang berarti user_controller versi 1, dan pada level struct diberi prefix versi dalam bentuk upper camel case seperti pada contoh diproject ini `V1UserController` yang berarti controller `UserController` versi 1.
 
 ### Database Migration
 untuk menjalankan database migration, developer dapat menjalankan command dibawah ini:
