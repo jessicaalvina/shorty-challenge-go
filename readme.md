@@ -143,7 +143,7 @@ docker-compose up --build
 
 setelah berhasil build, maka akan tampil tampilan seperti dibawah ini:
 ```
-ralali_golang    | usernamehere:passwordhere@tcp(hosthere:3308)/dbname?parseTime=1&loc=Asia%2FJakarta
+ralali_golang    | username:password@tcp(dev.ralali.xyz:3308)/dbname?parseTime=1&loc=Asia%2FJakarta
 ralali_golang    | 0.0.0.0:3000
 ralali_golang    | [GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
 ralali_golang    | 
@@ -151,11 +151,8 @@ ralali_golang    | [GIN-debug] [WARNING] Running in "debug" mode. Switch to "rel
 ralali_golang    |  - using env:	export GIN_MODE=release
 ralali_golang    |  - using code:	gin.SetMode(gin.ReleaseMode)
 ralali_golang    | 
-ralali_golang    | [GIN-debug] GET    /users                    --> ralali.com/controllers.(*UserController).GetList-fm (5 handlers)
-ralali_golang    | [GIN-debug] GET    /users/:id                --> ralali.com/controllers.(*UserController).GetById-fm (5 handlers)
-ralali_golang    | [GIN-debug] GET    /users/:id/orders         --> ralali.com/controllers.(*UserController).GetOrderByUserId-fm (5 handlers)
-ralali_golang    | [GIN-debug] POST   /users/:id                --> ralali.com/controllers.(*UserController).UpdateUser-fm (5 handlers)
-ralali_golang    | [GIN-debug] POST   /files                    --> ralali.com/controllers.(*FileController).UploadFile-fm (5 handlers)
+ralali_golang    | [GIN-debug] GET    /v1/users/:id             --> ralali.com/controllers.(*V1UserController).GetById-fm (4 handlers)
+ralali_golang    | [GIN-debug] POST   /v1/users/:id             --> ralali.com/controllers.(*V1UserController).UpdateById-fm (4 handlers)
 ralali_golang    | [GIN-debug] Listening and serving HTTP on 0.0.0.0:3000
 ```
 
