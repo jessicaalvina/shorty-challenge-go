@@ -59,7 +59,7 @@ func (handler *ErrorHelper) LogError(e error, isPanic bool) {
 	}
 
 	if isPanic {
-		log.Panic(e.Error() + "\n")
+		log.Panic(e.Error() + "\n\n--end-of-error--\n\n")
 	}
 
 }
