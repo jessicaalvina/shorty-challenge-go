@@ -33,7 +33,7 @@ func (handler *ErrorHelper) LogError(e error, isPanic bool) {
 	filePath := os.Getenv("ERROR_LOG_FILE")
 	fileName := currentTime.Format("2006-01-02")
 
-	logFullPath := fmt.Sprintf("%s/%s.log", filePath, fileName)
+	logFullPath := fmt.Sprintf("%s/error-%s.log", filePath, fileName)
 
 	file, err := os.OpenFile(logFullPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0600)
 	if nil != err {
@@ -43,8 +43,6 @@ func (handler *ErrorHelper) LogError(e error, isPanic bool) {
 
 	syscall.Dup2(int(file.Fd()), int(os.Stderr.Fd()))
 
-	log.Print("\n\n\n\n\n---> Error start here\n")
-
 	if nil == e {
 		log.Println("There's no error but calling logError!")
 	} else {
@@ -52,7 +50,7 @@ func (handler *ErrorHelper) LogError(e error, isPanic bool) {
 	}
 
 	if isPanic {
-		log.Panic(e)
+		log.Panic(e.Error() + "\n")
 	}
 
 }

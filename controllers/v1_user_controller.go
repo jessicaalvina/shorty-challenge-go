@@ -23,7 +23,7 @@ func V1UserControllerHandler(router *gin.Engine, db *gorm.DB) {
 		errorHelper: helpers.ErrorHelperHandler(),
 	}
 
-	group := router.Group("users")
+	group := router.Group("v1/users")
 	{
 		group.GET(":id", handler.GetById)
 		group.POST(":id", handler.UpdateById)
