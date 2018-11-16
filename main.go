@@ -58,6 +58,7 @@ func main() {
 	router.Use(defaultMiddleware.CORSMiddleware())
 
 	controllers.V1UserControllerHandler(router, db)
+	controllers.V2UserControllerHandler(router, db)
 
 	serverHost := os.Getenv("SERVER_ADDRESS")
 	serverPort := os.Getenv("SERVER_PORT")

@@ -19,7 +19,7 @@ type V1UserController struct {
 func V1UserControllerHandler(router *gin.Engine, db *gorm.DB) {
 
 	handler := &V1UserController{
-		userService: services.UserServiceHandler(db),
+		userService: services.V1UserServiceHandler(db),
 		errorHelper: helpers.ErrorHelperHandler(),
 	}
 

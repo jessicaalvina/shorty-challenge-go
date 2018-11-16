@@ -12,7 +12,7 @@ type V1UserService struct {
 	userRepository repositories.V1UserRepository
 }
 
-func UserServiceHandler(db *gorm.DB) (V1UserService) {
+func V1UserServiceHandler(db *gorm.DB) (V1UserService) {
 	service := V1UserService{
 		userRepository: repositories.V1UserRepositoryHandler(db),
 	}
