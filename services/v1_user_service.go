@@ -1,7 +1,6 @@
 package services
 
 import (
-	"fmt"
 	"github.com/jinzhu/copier"
 	"github.com/jinzhu/gorm"
 	"ralali.com/objects"
@@ -31,8 +30,6 @@ func (service *V1UserService) GetById(id int) (objects.V1UserObjectResponse, err
 }
 
 func (service *V1UserService) UpdateById(id int, requestObject objects.V1UserObjectRequest) (objects.V1UserObjectResponse, error) {
-
-	fmt.Println(requestObject)
 
 	user, err := service.userRepository.UpdateById(id, requestObject)
 	if nil != err {

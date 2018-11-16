@@ -1,7 +1,6 @@
 package repositories
 
 import (
-	"fmt"
 	"github.com/jinzhu/copier"
 	"github.com/jinzhu/gorm"
 	"ralali.com/models"
@@ -32,9 +31,6 @@ func (repository *V1UserRepository) UpdateById(id int, userData interface{}) (mo
 
 	userModel := models.User{}
 	copier.Copy(&userModel, &userData)
-
-	fmt.Println(userModel)
-	fmt.Println(userData)
 
 	query := repository.DB.Table("rl_users")
 	query = query.Where("id=?", id)
