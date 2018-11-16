@@ -5,19 +5,18 @@ import (
 	"github.com/jinzhu/copier"
 	"github.com/jinzhu/gorm"
 	"ralali.com/models"
-	"ralali.com/objects"
 )
 
-type UserRepository struct {
+type V1UserRepository struct {
 	DB gorm.DB
 }
 
-func UserRepositoryHandler(db *gorm.DB) (UserRepository) {
-	repository := UserRepository{DB: *db}
+func V1UserRepositoryHandler(db *gorm.DB) (V1UserRepository) {
+	repository := V1UserRepository{DB: *db}
 	return repository
 }
 
-func (repository *UserRepository) GetById(id int) (models.User, error) {
+func (repository *V1UserRepository) GetById(id int) (models.User, error) {
 
 	userResponse := models.User{}
 
@@ -29,7 +28,7 @@ func (repository *UserRepository) GetById(id int) (models.User, error) {
 
 }
 
-func (repository *UserRepository) UpdateById(id int, userData objects.UserObject) (models.User, error) {
+func (repository *V1UserRepository) UpdateById(id int, userData interface{}) (models.User, error) {
 
 	userModel := models.User{}
 	copier.Copy(&userModel, &userData)

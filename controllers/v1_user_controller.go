@@ -11,14 +11,14 @@ import (
 	"strconv"
 )
 
-type UserController struct {
-	userService services.UserService
+type V1UserController struct {
+	userService services.V1UserService
 	errorHelper helpers.ErrorHelper
 }
 
-func UserControllerHandler(router *gin.Engine, db *gorm.DB) {
+func V1UserControllerHandler(router *gin.Engine, db *gorm.DB) {
 
-	handler := &UserController{
+	handler := &V1UserController{
 		userService: services.UserServiceHandler(db),
 		errorHelper: helpers.ErrorHelperHandler(),
 	}
@@ -31,7 +31,7 @@ func UserControllerHandler(router *gin.Engine, db *gorm.DB) {
 
 }
 
-func (handler *UserController) GetById(context *gin.Context) {
+func (handler *V1UserController) GetById(context *gin.Context) {
 
 	id, err := strconv.Atoi(context.Param("id"))
 	if nil != err {
@@ -47,14 +47,14 @@ func (handler *UserController) GetById(context *gin.Context) {
 
 }
 
-func (handler *UserController) UpdateById(context *gin.Context) {
+func (handler *V1UserController) UpdateById(context *gin.Context) {
 
 	id, err := strconv.Atoi(context.Param("id"))
 	if nil != err {
 		handler.errorHelper.HTTPResponseError(context, err, constants.RequestParameterInvalid)
 	}
 
-	requestObject := objects.UserObject{}
+	requestObject := objects.V1UserObjectRequest{}
 	context.ShouldBind(&requestObject)
 
 	result, err := handler.userService.UpdateById(id, requestObject)

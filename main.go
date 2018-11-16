@@ -57,7 +57,7 @@ func main() {
 	router := gin.Default()
 	router.Use(defaultMiddleware.CORSMiddleware())
 
-	controllers.UserControllerHandler(router, db)
+	controllers.V1UserControllerHandler(router, db)
 
 	serverHost := os.Getenv("SERVER_ADDRESS")
 	serverPort := os.Getenv("SERVER_PORT")
