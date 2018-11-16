@@ -17,13 +17,22 @@ func ErrorHelperHandler() (ErrorHelper) {
 	return ErrorHelper{}
 }
 
-func (handler *ErrorHelper) HTTPResponseError(context *gin.Context, e error, errorCode int) {
-	errorConstant := constants.GetErrorConstant(errorCode)
+func (handler *ErrorHelper) HTTPResponseError(context *gin.Context, e error, defaultErrorCode int) {
+
+	switch e.Error() {
+	case "record not found":
+		defaultErrorCode = constants.ResourceNotFound
+		break
+	}
+
+	errorConstant := constants.GetErrorConstant(defaultErrorCode)
 	context.JSON(errorConstant.HttpCode, gin.H{
-		"code":    errorConstant.HttpCode,
+		"code":    defaultErrorCode,
 		"message": errorConstant.Message,
 	})
+
 	handler.LogError(e, true)
+
 }
 
 func (handler *ErrorHelper) LogError(e error, isPanic bool) {

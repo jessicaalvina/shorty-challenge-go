@@ -11,6 +11,7 @@ const (
 	RequestParameterInvalid      = 1000
 	ObjectNotInitializedProperly = 1001
 	InternalServerError          = 1002
+	ResourceNotFound             = 1003
 )
 
 var errorConstantMapping = map[int]ErrorConstant{
@@ -25,6 +26,10 @@ var errorConstantMapping = map[int]ErrorConstant{
 	InternalServerError: {
 		HttpCode: http.StatusInternalServerError,
 		Message:  "Something went wrong",
+	},
+	ResourceNotFound: {
+		HttpCode: http.StatusInternalServerError,
+		Message:  "Resource not found",
 	},
 }
 
