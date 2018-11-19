@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"os"
-	"ralali.com/constants"
+	"../constants"
 	"syscall"
 	"time"
 )

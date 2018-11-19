@@ -1,9 +1,9 @@
 package repositories
 
 import (
+	"../models"
 	"github.com/jinzhu/copier"
 	"github.com/jinzhu/gorm"
-	"ralali.com/models"
 )
 
 type V2UserRepository struct {

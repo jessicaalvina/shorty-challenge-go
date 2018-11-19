@@ -1,10 +1,10 @@
 package services
 
 import (
+	"../objects"
+	"../repositories"
 	"github.com/jinzhu/copier"
 	"github.com/jinzhu/gorm"
-	"ralali.com/objects"
-	"ralali.com/repositories"
 )
 
 type V1UserService struct {

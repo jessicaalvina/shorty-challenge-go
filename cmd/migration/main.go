@@ -8,7 +8,7 @@ import (
 	"log"
 	"net/url"
 	"os"
-	"ralali.com/models"
+	//"../models"
 )
 
 func init() {
@@ -49,6 +49,6 @@ func main() {
 	defer db.Close()
 
 	// migrate user
-	db.AutoMigrate(&models.User{})
+	//db.AutoMigrate(&models.User{})
 
 }

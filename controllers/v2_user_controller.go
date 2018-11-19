@@ -1,13 +1,13 @@
 package controllers
 
 import (
+	"../constants"
+	"../helpers"
+	"../objects"
+	"../services"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"net/http"
-	"ralali.com/constants"
-	"ralali.com/helpers"
-	"ralali.com/objects"
-	"ralali.com/services"
 	"strconv"
 )
 

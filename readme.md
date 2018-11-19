@@ -151,9 +151,9 @@ ralali_golang    | [GIN-debug] [WARNING] Running in "debug" mode. Switch to "rel
 ralali_golang    |  - using env:	export GIN_MODE=release
 ralali_golang    |  - using code:	gin.SetMode(gin.ReleaseMode)
 ralali_golang    | 
-ralali_golang    | [GIN-debug] GET    /v1/users/:id             --> ralali.com/controllers.(*V1UserController).GetById-fm (4 handlers)
-ralali_golang    | [GIN-debug] POST   /v1/users/:id             --> ralali.com/controllers.(*V1UserController).UpdateById-fm (4 handlers)
-ralali_golang    | [GIN-debug] POST   /v2/users/:id             --> ralali.com/controllers.(*V2UserController).UpdateById-fm (4 handlers)
+ralali_golang    | [GIN-debug] GET    /v1/users/:id             --> ../controllers.(*V1UserController).GetById-fm (4 handlers)
+ralali_golang    | [GIN-debug] POST   /v1/users/:id             --> ../controllers.(*V1UserController).UpdateById-fm (4 handlers)
+ralali_golang    | [GIN-debug] POST   /v2/users/:id             --> ../controllers.(*V2UserController).UpdateById-fm (4 handlers)
 ralali_golang    | [GIN-debug] Listening and serving HTTP on 0.0.0.0:3000
 ```
 

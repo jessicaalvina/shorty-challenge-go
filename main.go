@@ -1,6 +1,8 @@
 package main
 
 import (
+	"./controllers"
+	"./middleware"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
@@ -9,8 +11,6 @@ import (
 	"log"
 	"net/url"
 	"os"
-	"ralali.com/controllers"
-	"ralali.com/middleware"
 )
 
 func init() {
