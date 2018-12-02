@@ -5,23 +5,30 @@ import (
 	"./middleware"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/go-sql-driver/mysql"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	"github.com/joho/godotenv"
+	"github.com/rollbar/rollbar-go"
+	"go.uber.org/zap"
 	"log"
 	"net/url"
 	"os"
 )
 
 func init() {
-
 	if godotenv.Load() != nil {
 		log.Fatal("Error loading .env file")
 	}
-
 }
 
 func main() {
+	rollbar.SetToken(os.Getenv("ROLLBAR_TOKEN"))
+	rollbar.SetEnvironment(os.Getenv("APP_ENV"))
+	rollbar.WrapAndWait(startApp)
+}
+
+func startApp() {
 
 	dbHost := os.Getenv("DATABASE_HOST")
 	dbPort := os.Getenv("DATABASE_PORT")
@@ -44,9 +51,11 @@ func main() {
 
 	db, err := gorm.Open("mysql", connection)
 	if nil != err {
-		log.Fatal(err)
-		os.Exit(1)
+		panic(err)
 	}
+
+	zapLog, _ := zap.NewProduction()
+	db.SetLogger(CustomLogger(zapLog))
 
 	defer db.Close()
 
@@ -68,4 +77,27 @@ func main() {
 
 	router.Run(serverString)
 
+}
+
+func CustomLogger(zap *zap.Logger) *Logger {
+	return &Logger{
+		zap: zap,
+	}
+}
+
+type Logger struct {
+	zap *zap.Logger
+}
+
+func (l *Logger) Print(values ...interface{}) {
+	var additionalString = ""
+	for _, item := range values {
+		if _, ok := item.(string); ok {
+			additionalString = additionalString + fmt.Sprintf("\n%v", item)
+		}
+		if err, ok := item.(*mysql.MySQLError); ok {
+			err.Message = err.Message + additionalString
+			rollbar.Error(err)
+		}
+	}
 }
