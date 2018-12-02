@@ -55,7 +55,7 @@ func startApp() {
 	}
 
 	zapLog, _ := zap.NewProduction()
-	db.SetLogger(CustomLogger(zapLog))
+	db.SetLogger(customLogger(zapLog))
 
 	defer db.Close()
 
@@ -79,17 +79,17 @@ func startApp() {
 
 }
 
-func CustomLogger(zap *zap.Logger) *Logger {
-	return &Logger{
+func customLogger(zap *zap.Logger) *customLoggerStruct {
+	return &customLoggerStruct{
 		zap: zap,
 	}
 }
 
-type Logger struct {
+type customLoggerStruct struct {
 	zap *zap.Logger
 }
 
-func (l *Logger) Print(values ...interface{}) {
+func (l *customLoggerStruct) Print(values ...interface{}) {
 	var additionalString = ""
 	for _, item := range values {
 		if _, ok := item.(string); ok {
