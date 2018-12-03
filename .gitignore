@@ -2,3 +2,4 @@ storage/logs
 .env
 .idea
 swagger.json
+vendor

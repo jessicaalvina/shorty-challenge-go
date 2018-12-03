@@ -9,6 +9,9 @@ Dengan adanya kebutuhan untuk memecah Arsitektur Ralali yang Monolitik menjadi m
 - https://blog.alexellis.io/golang-writing-unit-tests/
 - http://doc.gorm.io
 
+### Panduan Best Practice
+- https://talks.golang.org/2013/bestpractices.slide
+
 ### Main Open Source Library
 - https://github.com/gin-gonic/gin
 - https://github.com/jinzhu/gorm -> (https://github.com/go-sql-driver/mysql)
