@@ -69,7 +69,7 @@ Digunakan untuk menyimpan constant-constant seperti `error_constants` atau `conf
 Storage bertugas untuk menyimpan file-file seperti log error atau temporary file storage.
 
 ## Dependency Manager
-Project ini sudah diintegrasi dengan Go Dep untuk dependency manager, seperti yang anda lihat, terdapat 2 file Gopkg.lock dan Gopkg.toml, Gopkg.lock bertujuan untuk locking dependency version pada project kita, sedangkan Gopkg.toml bertujuan untuk listing dependency yang digunakan pada project kita.
+Project ini sudah diintegrasi dengan Go Dep untuk dependency manager (yang merupakan official experiment tool dari Go), seperti yang anda lihat, terdapat 2 file Gopkg.lock dan Gopkg.toml, Gopkg.lock bertujuan untuk locking dependency version pada project kita, sedangkan Gopkg.toml bertujuan untuk listing dependency yang digunakan pada project kita.
 
 #### Menginsall semua dependency
 - `dep ensure`
@@ -80,6 +80,8 @@ Project ini sudah diintegrasi dengan Go Dep untuk dependency manager, seperti ya
 #### Mengupdate dependency
 - `dep ensure -update`
 
+Untuk informasi lebih lengkap mengenai Godep dapat dilihat pada link berikut ini:
+https://golang.github.io/dep/docs/daily-dep.html
 
 ## TODO
 - Endpoint documentation
@@ -107,7 +109,7 @@ services:
         container_name: ralali_golang
         command: > 
             sh -c "
-            cd /go/src/ralali.com && go get -v -d && go run main.go"
+            cd /go/src/ralali.com && dep ensure && go run main.go"
         ports:
             - "3000:3000"
         volumes:
@@ -127,7 +129,10 @@ RUN apk add --no-cache ca-certificates \
        gcc \
        git \
        musl-dev \
-       bash
+       bash \
+       curl
+
+RUN mkdir -p /go/bin && curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 ```
 pada dockerfile diatas kita menggunakan golang versio 1.11., dan menambahkan beberapa library kedalam docker image golang yang akan kita jalankan.
 
