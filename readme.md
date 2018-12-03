@@ -68,116 +68,30 @@ Digunakan untuk menyimpan constant-constant seperti `error_constants` atau `conf
 
 Storage bertugas untuk menyimpan file-file seperti log error atau temporary file storage.
 
-## Dependency Manager
-Project ini sudah diintegrasi dengan Go Dep untuk dependency manager (yang merupakan official experiment tool dari Go), seperti yang anda lihat, terdapat 2 file Gopkg.lock dan Gopkg.toml, Gopkg.lock bertujuan untuk locking dependency version pada project kita, sedangkan Gopkg.toml bertujuan untuk listing dependency yang digunakan pada project kita.
-
-#### Menginsall semua dependency
-- `dep ensure`
-
-#### Menambah dependency baru
-- `dep ensure -add {projectURL}`
-
-#### Mengupdate dependency
-- `dep ensure -update`
-
-Untuk informasi lebih lengkap mengenai Godep dapat dilihat pada link berikut ini:
-https://golang.github.io/dep/docs/daily-dep.html
-
 ## TODO
 - Endpoint documentation
 - Authorization middleware
 
 ## How to Setup
 
-### Docker environment
+Clone repository ini diluar direktori `$GOPATH`, copy .env.example dan buat satu file dengan nama .env, sesuaikan konfigurasi environment anda pada file .env 
 
-membuat direktori khusus untuk menyimpan workspace untuk project, dengan struktur sepertidibawah ini:
-```
-- ralali-golang-docker
- |- config
- |- golang
-```
+#### Setup Local
+- masuk kedalam directory repository
+- jalankan `go get -v -d`
+- jalankan `go run main.go`
 
-pada root directory `ralali-golang-docker` tambahkan konfigurasi docker dengan nama file `docker-compose.yml` dengan isi file sebagai berikut:
-```
-version: '2.1'
-services:
-    ralali_golang:
-        build:
-            context: ./config
-            dockerfile: golang-extensions
-        container_name: ralali_golang
-        command: > 
-            sh -c "
-            cd /go/src/ralali.com && dep ensure && go run main.go"
-        ports:
-            - "3000:3000"
-        volumes:
-            - './golang:/go:rw'
-```
+#### Setup Local Menggunakan Refresh
+- masuk kedalam directory repository
+- jalankan `go get -v -d`
+- jalankan `go run main.go`
+- jalankan `go get github.com/markbates/refresh`
+- jalankan `refresh init && refresh run`
 
-pada konfigurasi diatas, kita membuat sebuah service yang bernama `ralali_golang` dan mengarahkan port 3000 host ke port 3000 docker.
-
-directory mapping kita arahkan ke directory `golang` pada host yang dimapping ke directory `/go` pada docker.
-
-setelah docker configurationnya sudah disiapkan, berikutnya adalah menyiapkan docker file yang diletakkan pada directory config dengan nama file `golang-extension` yang berisi:
-```
-FROM golang:1.11.1-alpine3.8
-   
-RUN apk add --no-cache ca-certificates \
-       dpkg \
-       gcc \
-       git \
-       musl-dev \
-       bash \
-       curl
-
-RUN mkdir -p /go/bin && curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-```
-pada dockerfile diatas kita menggunakan golang versio 1.11., dan menambahkan beberapa library kedalam docker image golang yang akan kita jalankan.
-
-jika dockerfile dan dan docker configuration sudah disiapkan, maka tahap selanjutanya adalah menyiapkan projectnya.
-
-### Project Preparation
-
-melakukan preparasi project yang dapat diclone dari github repository kedalam docker volume yang sudah kita mapping tadi, tapi sebelumnya kita menambahkan directory terlebih dahulu kedalam directory `golang` host kita sehingga directorynya menjadi seperti dibawah ini:
-```
-- ralali-golang-docker
- |- config
-    |- golang-extensions
- |- golang
-    |- src
-```
-
-project yang akan disetup didalam directory `golang -> src` dengan menggunakan command:
-
-```git clone git@github.com:ralali/rl-ms-boilerplate-go.git golang/src/ralali.com```
-
-setelah project sudah berhasil diclone hal berikutnya adalah menyesuaikan environment file yang dapat dicopy dari `.env.example` menjadi `.env`, developer mengisi environment berdasarkan kredensial developer masing-masing.
-
-setelah project dan environment sudah berhasil disiapkan, maka berikutnya adalah melakukan build project golang kita dengan menjalankan docker yang sudah kita setting tadi, untuk menjalankan docker dilakukan dengan menggunakan command berikut ini:
-
-```
-docker-compose up --build
-``` 
-
-setelah berhasil build, maka akan tampil tampilan seperti dibawah ini:
-```
-ralali_golang    | username:password@tcp(dev.ralali.xyz:3308)/dbname?parseTime=1&loc=Asia%2FJakarta
-ralali_golang    | 0.0.0.0:3000
-ralali_golang    | [GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
-ralali_golang    | 
-ralali_golang    | [GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
-ralali_golang    |  - using env:	export GIN_MODE=release
-ralali_golang    |  - using code:	gin.SetMode(gin.ReleaseMode)
-ralali_golang    | 
-ralali_golang    | [GIN-debug] GET    /v1/users/:id             --> ../controllers.(*V1UserController).GetById-fm (4 handlers)
-ralali_golang    | [GIN-debug] POST   /v1/users/:id             --> ../controllers.(*V1UserController).UpdateById-fm (4 handlers)
-ralali_golang    | [GIN-debug] POST   /v2/users/:id             --> ../controllers.(*V2UserController).UpdateById-fm (4 handlers)
-ralali_golang    | [GIN-debug] Listening and serving HTTP on 0.0.0.0:3000
-```
-
-dengan tampilan seperti diatas, maka project golang berhasil di serve pada port `3000`, developer dapat mencoba mengakses endpoint-endpoint yang ada.
+#### Setup Using Dockerfile
+- masuk kedalam directory repository
+- build docker dengan menggunakan command `docker build -t my-golang-app .`
+- jalankan `go run my-golang-app`
 
 ### Unit Testing
 untuk menjalankan unit testing, developer dapat menjalankan command dibawah ini:
