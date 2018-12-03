@@ -68,6 +68,18 @@ Digunakan untuk menyimpan constant-constant seperti `error_constants` atau `conf
 
 Storage bertugas untuk menyimpan file-file seperti log error atau temporary file storage.
 
+## Dependency Manager
+Project ini sudah diintegrasi dengan Go Dep untuk dependency manager, seperti yang anda lihat, terdapat 2 file Gopkg.lock dan Gopkg.toml, Gopkg.lock bertujuan untuk locking dependency version pada project kita, sedangkan Gopkg.toml bertujuan untuk listing dependency yang digunakan pada project kita.
+
+#### Menginsall semua dependency
+- `dep ensure`
+
+#### Menambah dependency baru
+- `dep ensure -add {projectURL}`
+
+#### Mengupdate dependency
+- `dep ensure -update`
+
 
 ## TODO
 - Endpoint documentation
