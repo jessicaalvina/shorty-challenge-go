@@ -24,7 +24,7 @@ func init() {
 
 func main() {
 
-	if os.Getenv("APP_ENV") === 'production' {
+	if os.Getenv("APP_ENV") == "production" {
 		rollbar.SetToken(os.Getenv("ROLLBAR_TOKEN"))
 		rollbar.SetEnvironment(os.Getenv("APP_ENV"))
 		rollbar.WrapAndWait(startApp)
@@ -102,7 +102,7 @@ func (l *customLoggerStruct) Print(values ...interface{}) {
 		}
 		if err, ok := item.(*mysql.MySQLError); ok {
 			err.Message = err.Message + additionalString
-			if os.Getenv("APP_ENV") === 'production' {
+			if os.Getenv("APP_ENV") == "production" {
 				rollbar.Error(err)
 			}
 		}
