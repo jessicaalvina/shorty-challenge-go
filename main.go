@@ -29,7 +29,7 @@ func main() {
 		rollbar.SetEnvironment(os.Getenv("APP_ENV"))
 		rollbar.WrapAndWait(startApp)
 	} else {
-		startApp();
+		startApp()
 	}
 }
 
