@@ -23,9 +23,14 @@ func init() {
 }
 
 func main() {
-	rollbar.SetToken(os.Getenv("ROLLBAR_TOKEN"))
-	rollbar.SetEnvironment(os.Getenv("APP_ENV"))
-	rollbar.WrapAndWait(startApp)
+
+	if os.Getenv("APP_ENV") === 'production' {
+		rollbar.SetToken(os.Getenv("ROLLBAR_TOKEN"))
+		rollbar.SetEnvironment(os.Getenv("APP_ENV"))
+		rollbar.WrapAndWait(startApp)
+	} else {
+		startApp();
+	}
 }
 
 func startApp() {
@@ -97,7 +102,9 @@ func (l *customLoggerStruct) Print(values ...interface{}) {
 		}
 		if err, ok := item.(*mysql.MySQLError); ok {
 			err.Message = err.Message + additionalString
-			rollbar.Error(err)
+			if os.Getenv("APP_ENV") === 'production' {
+				rollbar.Error(err)
+			}
 		}
 	}
 }
