@@ -59,6 +59,8 @@ func startApp() {
 		panic(err)
 	}
 
+	db.LogMode(true)
+
 	zapLog, _ := zap.NewProduction()
 	db.SetLogger(customLogger(zapLog))
 
@@ -71,8 +73,8 @@ func startApp() {
 	router := gin.Default()
 	router.Use(defaultMiddleware.CORSMiddleware())
 
-	controllers.V1UserControllerHandler(router, db)
-	controllers.V2UserControllerHandler(router, db)
+	controllers.V1ShortyControllerHandler(router, db)
+	controllers.V2ShortyControllerHandler(router, db)
 
 	serverHost := os.Getenv("SERVER_ADDRESS")
 	serverPort := os.Getenv("SERVER_PORT")
