@@ -43,11 +43,14 @@ func (service *V1ShortyService) GetByShortcodeStats(shortcode string) (interface
 		return objects.V1ShortyObjectResponse{}, err
 	}
 
+	// result := objects.V1ShortyObjectResponse{}
 	if (shorty.RedirectCount == 0) {
 		result := objects.V1ShortyObjectResponseNoLastSeen{}
+		copier.Copy(&result, &shorty)
 		return result, nil	
 	} else {
-		result := objects.V1ShortyObjectResponse{}
+		result := objects.V1ShortyObjectResponseLastSeen{}
+		copier.Copy(&result, &shorty)
 		return result, nil	
 	}
 	
