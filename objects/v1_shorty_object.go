@@ -9,9 +9,14 @@ type V1ShortyObjectResponse struct {
 	RedirectCount	uint `json:"redirect_count"`
 }
 
+type V1ShortyObjectResponseLastSeen struct {
+	StartDate	time.Time `json:"start_date"`
+	LastSeenDate	time.Time `json:"last_seen_date"`
+	RedirectCount	uint `json:"redirect_count"`
+}
+
 type V1ShortyObjectResponseNoLastSeen struct {
 	StartDate	time.Time `json:"start_date"`
-	Url	string `json:"url"`
 	RedirectCount	uint `json:"redirect_count"`
 }
 
